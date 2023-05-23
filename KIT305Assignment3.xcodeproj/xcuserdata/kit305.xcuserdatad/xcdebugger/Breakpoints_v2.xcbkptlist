@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B3827DF3-C742-4C5B-8176-85AFCA45AE41"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E94CDCD-6825-4A71-8D82-3176C2DF6C76"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KIT305Assignment3/ViewControllers/Nappy/NappyDetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6E94CDCD-6825-4A71-8D82-3176C2DF6C76 - 14a1992da3c9fc90"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KIT305Assignment3.NappyDetailsViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "KIT305Assignment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kit305/Documents/KIT305Assigment3/KIT305Assignment3/KIT305Assignment3/ViewControllers/Nappy/NappyDetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "460">
+               </Location>
+               <Location
+                  uuid = "6E94CDCD-6825-4A71-8D82-3176C2DF6C76 - 14a1992da3c9fc90"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KIT305Assignment3.NappyDetailsViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "KIT305Assignment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kit305/Documents/KIT305Assigment3/KIT305Assignment3/KIT305Assignment3/ViewControllers/Nappy/NappyDetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "510">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "919CB62A-F420-4727-87E2-A3C1D42F43AA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KIT305Assignment3/ViewControllers/Nappy/NappyDetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

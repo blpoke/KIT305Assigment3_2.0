@@ -31,7 +31,6 @@ class NappyDetailsViewController: UIViewController {
         {
             let timestampValue = displayNappy.dateTime.seconds
             let timeInterval = TimeInterval(timestampValue)
-
             let date = Date(timeIntervalSince1970: timeInterval)
             
             datePicker.date = date

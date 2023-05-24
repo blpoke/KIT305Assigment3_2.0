@@ -27,6 +27,7 @@ class SleepDetailsUIViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         if let displaySleep = sleep
         {
+            //ChatGPT reference 2
             //convert timestamp to displayable date
             let timestampValue = displaySleep.dateTime.seconds
             let timeInterval = TimeInterval(timestampValue)
@@ -54,16 +55,8 @@ class SleepDetailsUIViewController: UIViewController, UIPickerViewDelegate, UIPi
         return "\(row)" // Display the row number as the title
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func onSaveSleep(_ sender: Any) {
         
         sleep!.dateTime = Timestamp(date: datePicker.date)

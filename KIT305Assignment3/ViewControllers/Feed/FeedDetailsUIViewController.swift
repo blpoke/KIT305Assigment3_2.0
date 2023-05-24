@@ -55,10 +55,7 @@ class FeedDetailsUIViewController: UIViewController, UIPickerViewDelegate, UIPic
             {
                 pickerView.selectRow(feed!.duration, inComponent: 0, animated: true)
             }
-            
         }
-        
-        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -72,13 +69,7 @@ class FeedDetailsUIViewController: UIViewController, UIPickerViewDelegate, UIPic
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(row)" // Display the row number as the title
     }
-
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        let _selectedInteger = row
-//    }
-    
-
-    
+  
     // MARK: - Navigation
     
     @IBAction func onFeedSave(_ sender: Any) {

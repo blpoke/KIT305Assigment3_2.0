@@ -44,21 +44,25 @@ class AddFeedUIViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBAction func onSave(_ sender: Any) {
         let feedCollection = self.db.collection("feeds")
         
-        var side: Bool
+        var side: Feed.FeedingOption
         
         if(sideSelector.selectedSegmentIndex == 0)
         {
-            side = true
+            side = .left
+        }
+        else if (sideSelector.selectedSegmentIndex == 1)
+        {
+            side = .right
         }
         else
         {
-            side = false
+            side = .bottle
         }
         
         feed = Feed(
                 dateTime: Timestamp(date: datePicker.date),
                 duration: pickerView.selectedRow(inComponent: 0),
-                left: side,
+                feedOpt: side,
                 note: noteField.text!)
         
         do

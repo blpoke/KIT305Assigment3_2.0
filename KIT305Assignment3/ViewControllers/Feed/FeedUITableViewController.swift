@@ -97,12 +97,18 @@ class FeedUITableViewController: UITableViewController {
             
             feedCell.titleLabel.text = dateString
             
-            if(feed.left == true){
+            if(feed.feedOpt == .left){
                 feedCell.subTitleLabel.text = "\(feed.duration) Mins (Left)"
             }
-            else{
+            else if (feed.feedOpt == .right)
+            {
                 feedCell.subTitleLabel.text = "\(feed.duration) Mins (Right)"
             }
+            else
+            {
+                feedCell.subTitleLabel.text = "\(feed.duration) Mins (Bottle)"
+            }
+            
             
         }
 

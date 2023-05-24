@@ -38,13 +38,17 @@ class FeedDetailsUIViewController: UIViewController, UIPickerViewDelegate, UIPic
             //assign UI values based on selected feed
             datePicker.date = date
             
-            if(feed!.left == true)
+            if(feed!.feedOpt == .left)
             {
                 sideSelector.selectedSegmentIndex = 0
             }
-            else
+            else if(feed!.feedOpt == .right)
             {
                 sideSelector.selectedSegmentIndex = 1
+            }
+            else
+            {
+                sideSelector.selectedSegmentIndex = 2
             }
             
             if(feed!.duration < 100)
@@ -82,11 +86,15 @@ class FeedDetailsUIViewController: UIViewController, UIPickerViewDelegate, UIPic
         feed!.dateTime = Timestamp(date: datePicker.date)
         if(sideSelector.selectedSegmentIndex == 0)
         {
-            feed!.left = true
+            feed!.feedOpt = .left
+        }
+        else if(sideSelector.selectedSegmentIndex == 1)
+        {
+            feed!.feedOpt = .right
         }
         else
         {
-            feed!.left = false
+            feed!.feedOpt = .bottle
         }
         feed!.duration = pickerView.selectedRow(inComponent: 0)
        

@@ -17,6 +17,8 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var leftFeeds: UILabel!
     @IBOutlet weak var rightFeeds: UILabel!
     @IBOutlet weak var sleepsTotal: UILabel!
+    @IBOutlet weak var bottleFeedsTotal: UILabel!
+    
     
     var date: Date?
     var timestamp: Timestamp?
@@ -28,6 +30,7 @@ class SummaryViewController: UIViewController {
     var leftFeedsCount = 0
     var rightFeedsCount = 0
     var sleepCount = 0
+    var bottleFeedsCount = 0
     
     let db = Firestore.firestore()
     
@@ -62,7 +65,7 @@ class SummaryViewController: UIViewController {
             
         }
     
-    func fetchNappiesByDate(){
+    func fetchNappiesByDate() {
         
         let nappyCollection = db.collection("nappies")
         
@@ -74,6 +77,9 @@ class SummaryViewController: UIViewController {
             }
             else
             {
+                self.dirtyNappiesCount = 0 // Reset the count before updating
+                self.wetNappiesCount = 0
+                
                 for document in result!.documents
                 {
                     let conversionResult = Result
@@ -85,30 +91,24 @@ class SummaryViewController: UIViewController {
                         case .success(let nappy):
                             print("Nappy: \(nappy)")
 
-                            //NOTE THE ADDITION OF THIS LINE
-                        if(nappy.dirty == true)
-                        {
-                            self.dirtyNappiesCount = self.dirtyNappiesCount + 1
-                        }
-                        else
-                        {
-                            self.wetNappiesCount = self.wetNappiesCount + 1
+                        if nappy.dirty {
+                            self.dirtyNappiesCount += 1
+                        } else {
+                            self.wetNappiesCount += 1
                         }
                         
-                        self.wetNappies.text = String(self.wetNappiesCount)
-                        self.dirtyNappies.text = String(self.dirtyNappiesCount)
+//                        self.wetNappies.text = String(self.wetNappiesCount)
+//                        self.dirtyNappies.text = String(self.dirtyNappiesCount)
 
                         case .failure(let error):
                             // A `Movie` value could not be initialized from the DocumentSnapshot.
                             print("Error decoding Nappy: \(error)")
                     }
                 }
+                self.wetNappies.text = String(self.wetNappiesCount)
+                self.dirtyNappies.text = String(self.dirtyNappiesCount)
             }
         }
-  
-        
-        self.wetNappies.text = String(wetNappiesCount)
-        self.dirtyNappies.text = String(dirtyNappiesCount)
     }
     
     func fetchFeedsByDate(){
@@ -123,6 +123,10 @@ class SummaryViewController: UIViewController {
             }
             else
             {
+                self.leftFeedsCount = 0
+                self.rightFeedsCount = 0
+                self.bottleFeedsCount = 0
+                
                 for document in result!.documents
                 {
                     let conversionResult = Result
@@ -134,23 +138,28 @@ class SummaryViewController: UIViewController {
                         case .success(let feed):
                             print("Feed: \(feed)")
 
-                        if(feed.left == true)
+                        if(feed.feedOpt == .left)
                         {
-                            self.leftFeedsCount = self.leftFeedsCount + 1
+                            self.leftFeedsCount += feed.duration
+                        }
+                        else if(feed.feedOpt == .right)
+                        {
+                            self.rightFeedsCount += feed.duration
                         }
                         else
                         {
-                            self.rightFeedsCount = self.rightFeedsCount + 1
+                            self.bottleFeedsCount += feed.duration
                         }
                         
-                        self.leftFeeds.text = String(self.leftFeedsCount)
-                        self.rightFeeds.text = String(self.rightFeedsCount)
-
                         case .failure(let error):
                             // A `Movie` value could not be initialized from the DocumentSnapshot.
                             print("Error decoding Feed: \(error)")
                     }
                 }
+                
+                self.leftFeeds.text = String(self.leftFeedsCount)
+                self.rightFeeds.text = String(self.rightFeedsCount)
+                self.bottleFeedsTotal.text = String(self.bottleFeedsCount)
             }
         }
     }
@@ -167,6 +176,8 @@ class SummaryViewController: UIViewController {
             }
             else
             {
+                self.sleepCount = 0
+                
                 for document in result!.documents
                 {
                     let conversionResult = Result
@@ -179,13 +190,13 @@ class SummaryViewController: UIViewController {
                             print("Sleep: \(sleep)")
 
                         self.sleepCount = self.sleepCount + sleep.duration
-                        self.sleepsTotal.text = String(self.sleepCount)
 
                         case .failure(let error):
                             // A `Movie` value could not be initialized from the DocumentSnapshot.
                             print("Error decoding Feed: \(error)")
                     }
                 }
+                self.sleepsTotal.text = String(self.sleepCount)
             }
         }
     }
@@ -201,9 +212,20 @@ class SummaryViewController: UIViewController {
         endTimestamp = Timestamp(date: endOfDay)
     }
 
-    @IBAction func shareSummary(_ sender: Any) {
+    @IBAction func shareSummary(_ sender: UIView) {
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Custom date format
+
+        let formattedDate = dateFormatter.string(from: date!)
+        print(formattedDate)
+        
+        let shareViewController = UIActivityViewController(
+            activityItems: ["Baby Summary for \(formattedDate)\nTotal Wet Nappies: \(wetNappiesCount)\nTotal Dirty Nappies: \(dirtyNappiesCount)\nTotal Feed Time on Left: \(leftFeedsCount) Mins\nTotal Feed Time on Right: \(rightFeedsCount)\nTotal Sleep Time: \(sleepCount)"],
+            applicationActivities: [])
+        
+        shareViewController.popoverPresentationController?.sourceView = sender
+        
+        present(shareViewController, animated: true, completion: nil)
     }
-    
-    
 }
